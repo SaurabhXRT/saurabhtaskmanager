@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Task Manager by saurabh kumar</title>
+</head>
+<script>
+  function myFunction(){
+    const container = document.getElementById("container-task");
+    if(container.style.display = "none"){
+      container.style.display = "block";
+    }
+    else{
+      container.style.display = "none";
+    }
+  }
+</script>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+
+  }
+  body{
+    background-color: #eee;
+  }
+  .header{
+    padding: 0.7rem;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    background-color: #fff;
+
+  }
+  
+  .container{
+   /* display: flex;
+    flex-direction: column;*/
+    background-color: #fff;
+    width: 50%;
+    margin: 3% auto;
+    padding: 0.8rem;
+  }
+  .container form{
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .container form input{
+    background-color: #eee;
+    margin-top: 0.6rem;
+    border: 0.1rem solid black;
+    border-radius: 1rem;
+    padding: 0.5rem;
+  }
+  .container form label{
+    font-size: 1.3rem;
+    margin-top: 0.8rem;
+  }
+  .checkbox{
+    margin-top: 0.6rem;
+    
+  }
+  .label{
+     margin-top: 0.8rem;
+  }
+  #Description{
+    height: 4rem;
+  }
+  .container form button{
+    margin-top: 0.6rem;
+    padding: 0.2rem;
+    font-size: 1rem;
+  }
+  .para p{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+  .para .para-li{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+   
+    
+  }
+   .para .para-li a{
+    text-decoration: none;
+    color: black;
+    padding: 0.4rem;
+    /*border: 0.1rem solid black;*/
+    border-radius: 1rem;
+   }
+   #container-task{
+    display: none;
+   }
+   .searchtab{
+    list-style-type: none;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+   }
+
+   
+   
+
+</style>
+<body>
+
+  <div class="header">
+    <h1>welcome to task manager</h1>
+  </div>
+
+  <div class="container">
+
+    
+    <form action="/api/createtasklist" method="POST">
+      <label for="Name">Task List Name:</label>
+      <input type="text" id="Name" name="Name" required>
+  
+      <label for="Description">Description:</label>
+      <input type="text" id="Description" name="Description" required>
+      <div class="checkbox">
+      <label for="Active">Active:</label>
+      <input id="checkbox"  type="checkbox" name="Active" value="true">
+      </div>
+  
+      <button type="submit">Submit Task List</button>
+
+    </form>
+    <div class="para">
+       <p> {{para.message}} {{taskListId}}</p>
+       <div class="para-li">
+
+       <a href="#" onclick="myFunction()"> <li>{{para.createtask}}</li></a>
+
+       <a href="/createnewtask"> <li>{{para.createnewtasklist}}</li></a>
+       </div>
+    </div>
+    <div class="searchtab">
+      <a href="/searchtask"> <li>Click here to search the existing task</li> </a>
+    </div>
+  </div>
+ <div id="container-task">
+   <div class="container">
+
+   
+
+
+    <h2>Create Task</h2>
+    <form action="/api/createtask" method="POST">
+      <label for="TaskName">Task Name:</label>
+      <input type="text" id="TaskName" name="name" required>
+  
+      <label for="Description">Description:</label>
+      <input type="text" id="Description" name="description" required>
+  
+      <label for="DueDate">Due Date:</label>
+      <input type="text" id="DueDate" name="dueDate" placeholder="dd-mm-yyyy" required>
+  
+      <label for="Period">Period:</label>
+      <input type="text" id="Period" name="period"  required>
+      <div class="label">
+      <label for="PeriodType">Period Type:</label>
+      <select id="PeriodType" name="periodType" required>
+        <option value="monthly">Monthly</option>
+        <option value="quarterly">Quarterly</option>
+        <option value="yearly">Yearly</option>
+      </select>
+      </div>
+  
+      <label for="TaskListId">Task List Id:</label>
+      <input type="text" id="TaskListId" name="taskListId" value="{{taskListId}}">
+  
+      <button type="submit">Create Task</button>
+    </form>
+    <div class="searchtab">
+      <a href="/searchtask"> <li>Click here to search the existing task</li> </a>
+    </div>
+</div>
+</div>
+ 
+
+     
+</body>
+</html>

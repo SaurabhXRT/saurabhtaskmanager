@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Task Manager by saurabh kumar</title>
+</head>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    }
+     
+  body{
+    background-color: #eee;
+  }
+  .header{
+    padding: 0.7rem;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    background-color: #fff;
+
+  }
+  .tasklist{
+    display: flex;
+    flex-direction: column;
+
+  }
+  .tasklist h1{
+    text-align: center;
+    width: 20%;
+    margin: 2% auto;
+    background-color: #fff;
+  }
+  .tasklist form{
+    display: flex;
+    width: auto;
+    margin: auto;
+    background-color: #fff;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  .tasklist form input{
+    background-color: #eee;
+    padding: 0.4rem;
+    width: 20rem;
+    border: 0.1rem solid black;
+    border-radius: 1rem;
+  }
+  .tasklist form label{
+    font-size: 2rem;
+  
+  }
+  .tasklist form button{
+    font-size: 1.2rem;
+    width: 6rem;
+    border-radius: 1rem;
+  }
+  .table{
+    width: auto;
+    font-size: 1rem;
+    background-color: #fff;
+    gap: 0.8rem;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    border-collapse: collapse;
+  }
+  .table th,td{
+   
+   /* padding-left: 3rem;*/
+    padding: 1rem 3rem 0.5rem ;
+     border: 1px solid black;
+  }
+  .table th{
+     font-size: 1.4rem;
+  }
+  .searchtab{
+    list-style-type: none;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+   }
+ 
+</style>
+<body>
+
+   <div class="header">
+    <h1>welcome to task manager</h1>
+  </div>
+
+    <div class="tasklist">
+
+
+
+   <h1>List Tasks</h1>
+
+    <form action="/api/tasklist" method="GET">
+      <label for="searchText">Search:</label>
+      <input type="text" id="searchText" name="searchText" placeholder="search your created task with task name" required>
+  
+      <button type="submit">Search</button>
+    </form>
+    <div class="table">
+    <table>
+      <thead>
+        <tr>
+          <th>Task Name</th>
+          <th>Description</th>
+          <th>Period Type</th>
+          <th>Period</th>
+          <th>Due Date</th>
+          <th>Task List Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each tasks}}
+        <tr>
+          <td>{{this.name}}</td>
+          <td>{{this.description}}</td>
+          <td>{{this.periodType}}</td>
+          <td>{{this.period}}</td>
+          <td>{{this.dueDate}}</td>
+          <td>{{this.taskListName}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      {{#if prevPage}}
+      <a href="?page={{prevPage}}{{#if searchText}}&searchText={{searchText}}{{/if}}">&laquo; Previous</a>
+      {{/if}}
+      {{#if nextPage}}
+      <a href="?page={{nextPage}}{{#if searchText}}&searchText={{searchText}}{{/if}}">Next &raquo;</a>
+      {{/if}}
+    </div>
+  
+    <p>Total Tasks: {{count}}</p>
+    <div class="searchtab">
+    <a href="/createnewtask"> <li>move back to create new tasklist</li> </a>
+    </div>
+    </div>
+   
+  </div>
+    
+  
+  
+
+   
+</body>
+</html>
